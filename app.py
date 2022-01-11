@@ -23,14 +23,20 @@ warnings.filterwarnings('ignore')
 app = Flask(__name__)
 run_with_ngrok(app)
 # Model saved with Keras model.save()
-MODEL_PATH = 'models/model_vgg.h5'
-
+MODEL_PATH_VGG = 'models/model_vgg.h5'
+MODEL_PATH_CONV2D = 'models/model_conv_2d.h5'
+MODEL_PATH_MOBNETV2 = 'models/model_mobv2.h5'
+MODEL_PATH_RESNET50 = 'models/model_resnet50.h5'
 # Load trained model
-model = load_model(MODEL_PATH)
+model_vgg = load_model(MODEL_PATH_VGG)
+model_conv_2d = load_model(MODEL_PATH_CONV2D)
+model_mobv2 = load_model(MODEL_PATH_MOBNETV2)
+model_resnet50 = load_model(MODEL_PATH_RESNET50)
+
 print('Model loaded. Start serving...')
 
 print('Model loaded. Check http://127.0.0.1:5000/')
-def preprocess_img(img_path, model, img_size):
+def preprocess_img(img_path, img_size):
     img = Image.load_img(img_path, target_size=img_size)
     img_tensor = Image.img_to_array(img)
     img_tensor = np.expand_dims(img_tensor, axis=0)
@@ -38,15 +44,22 @@ def preprocess_img(img_path, model, img_size):
 
     return img_tensor
 
-def model_predict(img_path, model):
+def model_predict(img_path):
     DIMS = (224, 224, 3)
-    img_tensor = preprocess_img(img_path, model, DIMS)
-    
-    preds = model.predict(img_tensor)
-    if preds[0][0] > 0.5:
-        return "Lyme - Positive"
-    else:
-        return "Lyme - Negative"
+    DIMS_CONV = (300, 300, 3)
+    img_tensor = preprocess_img(img_path, DIMS)
+    img_tensor_conv = preprocess_img(img_path, DIMS_CONV)
+    res = {}
+    res["VGG19"] = str(model_vgg.predict(img_tensor)[0][0])
+    res["CONV2D"] = str(model_conv_2d.predict(img_tensor_conv)[0][0])
+    res["MobileNet V2"] = str(model_mobv2.predict(img_tensor)[0][0])
+    res["ResNet 50"] = str(model_resnet50.predict(img_tensor)[0][0])
+
+    # if preds[0][0] > 0.5:
+    #     return "Lyme - Positive"
+    # else:
+    #     return "Lyme - Negative"
+    return res
 
 @app.route('/', methods=['GET'])
 def index():
@@ -67,7 +80,7 @@ def upload():
         f.save(file_path)
 
         # Make prediction
-        preds = model_predict(file_path, model)
+        preds = model_predict(file_path)
         return preds
     return None
 
