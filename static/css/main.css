@@ -1,3 +1,14 @@
+body {
+    background: #C33764;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #1D2671, #C33764);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #1D2671, #C33764); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #fff;
+}
+
+.filter-white {
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(231deg) brightness(103%) contrast(101%);
+}
+
 .img-preview {
     width: 256px;
     height: 256px;
@@ -54,4 +65,9 @@ input[type="file"] {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+.model-choosing {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 15px;
 }

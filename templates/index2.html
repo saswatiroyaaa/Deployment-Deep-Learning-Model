@@ -1,0 +1,75 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="row d-flex justify-content-center">
+    <div class="col-md-6">
+        <div class="text-center">
+            <h2>Upload infection image here</h2>
+        </div>
+
+        <div style="margin: 2px auto;">
+            <form id="upload-file" method="post" enctype="multipart/form-data">
+                <div class="text-center">
+                    <label for="imageUpload" class="upload-label">
+                        Upload
+                    </label>
+                </div>
+                <input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg">
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- ======================================================================== -->
+
+<div class="row d-flex justify-content-center">
+    <div class="col-md-6">
+        <div class="image-section" style="display:none;">
+            <div class="img-preview" style="margin: 0 auto;">
+                <div id="imagePreview">
+                </div>
+            </div>
+            <div class="text-center" style="margin: 10px auto;">
+                <button type="button" class="btn btn-primary btn-lg " id="btn-predict">Predict!</button>
+            </div>
+        </div>
+
+        <div class="loader text-center" style="margin: 0 auto; display:none;"></div>
+    </div>
+</div>
+
+
+<!-- ======================================================================== -->
+<div class="row d-flex justify-content-center">
+    <div class="col-md-6">
+
+        <div class="model-choosing">
+            <button type="button" class="btn btn-light model-choose" id="machine_learning">ML Models</button>
+            <button type="button" class="btn btn-light model-choose" id="hybrid_learning">Hyb. Models</button>
+            <button type="button" class="btn btn-light model-choose" id="transfer_learning">TL Models</button>
+            <button type="button" class="btn btn-light model-choose" id="sequential_learning">Seq. Models</button>
+        </div>
+        <!-- For dropdown menus -->
+        <div class="dropdown text-center">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                -- Select a model --
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <button class="dropdown-item" type="button"></button>
+            </div>
+        </div>
+
+        <!-- Result Section -->
+        
+        <div id="result" style="margin: 10px auto;">
+            <div class="card mx-auto" style="width: 18rem;">
+                <div class="card-body">
+                <h5 class="card-title" id="model-name"></h5>
+                <p class="card-text" id="probabillity"></p>
+                <p class="card-text" id="verdict"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -19,7 +19,7 @@ $(document).ready(function () {
     $("#imageUpload").change(function () {
         $('.image-section').show();
         $('#btn-predict').show();
-        $('#result').text('');
+        // $('#result').text('');
         $('#result').hide();
         readURL(this);
     });
