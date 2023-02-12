@@ -1,5 +1,5 @@
-import preprocess
-import model_loader
+from my_utils import preprocess
+from my_utils import model_loader
 def model_predict(img_path, models=None):
     DIMS = (224, 224, 3)
     DIMS_CONV = (300, 300, 3)
@@ -46,3 +46,6 @@ def model_predict(img_path, models=None):
     # else:
     #     return "Lyme - Negative"
     return res
+
+if __name__ == "__main__":
+    print("INSIDE GET_PREDICTIONS FILE")

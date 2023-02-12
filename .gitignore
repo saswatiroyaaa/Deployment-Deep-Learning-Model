@@ -2,3 +2,4 @@ uploads/*
 !uploads/.gitkeep
 models/*
 !models/readme.md
+my_utils/__pycache__
