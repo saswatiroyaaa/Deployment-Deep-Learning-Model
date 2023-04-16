@@ -29,7 +29,7 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 # Define a flask app
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-run_with_ngrok(app)
+#run_with_ngrok(app)
 models = None
 
 # Model saved with Keras model.save()

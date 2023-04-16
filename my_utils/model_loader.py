@@ -19,10 +19,10 @@ MOBNETV2_CLASSIFIER = 'models/glaucoma_mobilenet.h5'
 #VGG_CONV_DENSE = 'models/hybrid_models/vgg19_conv_dense.h5'
 
 # Machine Learning Model PATH
-DT = "models/glaucoma_decision_tree.sav"
-RF = "models/glaucoma_rf.sav"
-LR = "models/glaucoma_logistic_regression.sav"
-KNN = "models/glaucoma_knn.sav"
+#DT = "models/glaucoma_decision_tree.sav"
+RF = "models/glaucoma_random_forest.sav"
+#LR = "models/glaucoma_logistic_regression.sav"
+#KNN = "models/glaucoma_knn.sav"
 #NB = "models/ml_models/nb.sav"
 
 def get_models(transfer_learning=True, machine_learning=True, sequential=True, hybrid=True):
@@ -41,10 +41,10 @@ def get_models(transfer_learning=True, machine_learning=True, sequential=True, h
 #    }
 
     models["machine_learning"] = {
-        "DT" : pickle.load(open(DT, "rb")),
+ #       "DT" : pickle.load(open(DT, "rb")),
         "RF" : pickle.load(open(RF, "rb")),
-        "LR" : pickle.load(open(LR, "rb")),
-        "KNN" : pickle.load(open(KNN, "rb")),
+ #       "LR" : pickle.load(open(LR, "rb")),
+ #       "KNN" : pickle.load(open(KNN, "rb")),
 #        "NB" : pickle.load(open(NB, "rb"))
     }
 

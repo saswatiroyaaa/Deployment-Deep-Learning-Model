@@ -1,11 +1,11 @@
-import preprocess
-import model_loader
+from my_utils import preprocess
+from my_utils import model_loader
 def model_predict(img_path, models=None):
     DIMS = (256, 256, 3)
     #DIMS_CONV = (300, 300, 3)
 
     img_tensor = preprocess.preprocess_img(img_path, DIMS)
-    img_tensor_conv = preprocess.preprocess_img(img_path, DIMS_CONV)
+#    img_tensor_conv = preprocess.preprocess_img(img_path, DIMS_CONV)
     img_tensor_flat = img_tensor.reshape((1, -1))
     res = {
         "transfer_learning": {},
@@ -22,8 +22,8 @@ def model_predict(img_path, models=None):
     for model_name, model in models["transfer_learning"].items():
         res["transfer_learning"][model_name] = "{:.3f}".format(model.predict(img_tensor)[0][0])
 
-        res["transfer_learning"]["VGG19"] = "{:.3f}".format(models["transfer_learning"]["VGG19"].predict(img_tensor)[0][0])
-        res["transfer_learning"]["MobileNet V2"] = "{:.3f}".format(models["transfer_learning"]["MobileNetV2"].predict(img_tensor)[0][0])
+    #    res["transfer_learning"]["VGG19"] = "{:.3f}".format(models["transfer_learning"]["VGG19"].predict(img_tensor)[0][0])
+    #    res["transfer_learning"]["MobileNet V2"] = "{:.3f}".format(models["transfer_learning"]["MobileNetV2"].predict(img_tensor)[0][0])
     # # res["ResNet 50"] = str(model_resnet50.predict(img_tensor)[0][0])
     # res["Inception V3"] = "{:.3f}".format(model_incepv3.predict(img_tensor)[0][0])
 
@@ -34,10 +34,10 @@ def model_predict(img_path, models=None):
     
 
     #res["machine_learning"]["SVM"] = "{:.3f}".format(models["machine_learning"]["SVM"].predict(img_tensor_flat)[0])
-    res["machine_learning"]["Logistic Regression"] = "{:.3f}".format(models["machine_learning"]["LR"].predict(img_tensor_flat)[0])
-    res["machine_learning"]["KNN"] = "{:.3f}".format(models["machine_learning"]["KNN"].predict(img_tensor_flat)[0])
+ #   res["machine_learning"]["Logistic Regression"] = "{:.3f}".format(models["machine_learning"]["LR"].predict(img_tensor_flat)[0])
+ #   res["machine_learning"]["KNN"] = "{:.3f}".format(models["machine_learning"]["KNN"].predict(img_tensor_flat)[0])
     res["machine_learning"]["Random Forest"] = "{:.3f}".format(models["machine_learning"]["RF"].predict(img_tensor_flat)[0])
-    res["machine_learning"]["Decision Tree"] = "{:.3f}".format(models["machine_learning"]["DT"].predict(img_tensor_flat)[0])
+ #   res["machine_learning"]["Decision Tree"] = "{:.3f}".format(models["machine_learning"]["DT"].predict(img_tensor_flat)[0])
     
     # except Exception as e:
     #     print(e)
